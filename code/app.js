@@ -49,6 +49,9 @@ bot.on('message', msg => {
   bot.sendMessage(msg.chat.id, 'I am alive!');
 });
 
+app.get('/dev', (req,resp) => {
+ resp.json({ dagoberto : "Está vivo "})
+})
 
 
 
