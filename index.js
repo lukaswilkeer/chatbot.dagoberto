@@ -70,20 +70,19 @@
 		return bot.sendMessage(msg.chat.id, 'Até que fim !').then(re => {
 			// Start updating message
 
-			let chatId = msg.chat.id;
+			console.log(re);
 
-			let horaemhora = 1000 * 60 * 60;
+			let horaemhora = 1000 * 60;
 
 			setInterval(x => {
 
 				let horaAtual = new Date().toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, '$1');
+				console.log(horaAtual);
 
-				if (horaAtual === "02:45:00") {
+				if (horaAtual === "02:48:00") {
 
 					bot.sendMessage(chatId, `
-							Galera, o que fizeram hoje?  
-							ajudem a Barbara, a manter as paradas atualizadas certinho ! 
-							escrevam @ba_oliveira e o que fizeram hoje, com o horário de preferencia.
+							Já viu que horas são ? ${horaAtual}
 						`)
 						.catch(error => console.log('Error:', error));
 				}
