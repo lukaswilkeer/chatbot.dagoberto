@@ -72,14 +72,13 @@
 
 			console.log(re);
 
-			let horaemhora = 1000 * 60;
+			let horaemhora = 1000;
 
 			setInterval(x => {
 
 				let horaAtual = new Date().toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, '$1');
-				console.log(horaAtual);
 
-				if (horaAtual === "02:48:00") {
+				if (horaAtual === "02:52:00") {
 
 					bot.sendMessage(chatId, `
 							Já viu que horas são ? ${horaAtual}
