@@ -67,7 +67,9 @@
 
 	bot.on('/viva', msg => {
 
-		return bot.sendMessage(msg.chat.id, 'Até que fim !').then(re => {
+		let chatId = msg.chat.id;
+		
+		return bot.sendMessage(, 'Até que fim !').then(re => {
 			// Start updating message
 
 			console.log(re);
