@@ -1,10 +1,8 @@
 (() => {
 
 const TelegramBot = require('node-telegram-bot-api');
-const express = require('express');
-const bodyParser = require('body-parser');
 
-const TOKEN_TELEGRAM = `` ;
+
 // token gerado pelo @bot_father
 
 // Dagoberto o Bot
@@ -15,66 +13,39 @@ const TOKEN_TELEGRAM = `` ;
  * updates in your express app
  */
 
-const TOKEN = process.env.TELEGRAM_TOKEN || '299692951:AAGgYFsiu57O2Th84QPb58aIB21eohdQvEI';
-const url = 'https://intense-wave-42330.herokuapp.com/';
-const port = process.env.PORT || 5000;
+const TOKEN = '299692951:AAGgYFsiu57O2Th84QPb58aIB21eohdQvEI';
 
+/**
+ * This example demonstrates setting up webhook
+ * on the Heroku platform.
+ */
 
+const options = {
+  webHook: {
+    // Port to which you should bind is assigned to $PORT variable
+    // See: https://devcenter.heroku.com/articles/dynos#local-environment-variables
+    port: process.env.PORT
+    // you do NOT need to set up certificates since Heroku provides
+    // the SSL certs already (https://<app-name>.herokuapp.com)
+    // Also no need to pass IP because on Heroku you need to bind to 0.0.0.0
+  }
+};
+// Heroku routes from port :443 to $PORT
+// Add URL of your app to env variable or enable Dyno Metadata
+// to get this automatically
+// See: https://devcenter.heroku.com/articles/dyno-metadata
+const url = process.env.APP_URL || 'https://intense-wave-4233.herokuapp.com:443';
+const bot = new TelegramBot(TOKEN, options);
 
-// No need to pass any parameters as we will handle the updates with Express
-const bot = new TelegramBot(TOKEN);
 
 // This informs the Telegram servers of the new webhook.
+// Note: we do not need to pass in the cert, as it already provided
 bot.setWebHook(`${url}/bot${TOKEN}`);
 
-const app = express();
-
-// parse the updates to JSON
-app.use(bodyParser.json());
-
-// We are receiving updates at the route below!
-app.post(`/bot${TOKEN}`, (req, res) => {
-  bot.processUpdate(req.body);
-  res.sendStatus(200);
-});
-
-// Start Express Server
-app.listen(port, () => {
-  console.log(`Express server is listening on ${port}`);
-});
 
 // Just to ping!
-
-
-app.get('/dev', (req,resp) => {
- resp.json({ dagoberto : "Está vivo "})
-})
-
-
-// Matches "/echo [whatever]"
-bot.onText(/\/echo (.+)/, (msg, match) => {
-  // 'msg' is the received Message from Telegram
-  // 'match' is the result of executing the regexp above on the text content
-  // of the message
-
-  const chatId = msg.chat.id;
-  const resp = match[1]; // the captured "whatever"
-
-  // send back the matched "whatever" to the chat
-  bot.sendMessage(chatId, resp);
-});
-
-// Listen for any kind of message. There are different kinds of
-// messages.
-// bot.on('message', (msg) => {
-//   const chatId = msg.chat.id;
-
-//   // send a message to the chat acknowledging receipt of their message
-//   bot.sendMessage(chatId, 'Received your message');
-// });
-
-bot.on('message', msg => {
-  bot.sendMessage(msg.chat.id, 'I am alive!');
+bot.on('message', function onMessage(msg) {
+  bot.sendMessage(msg.chat.id, 'Eu estou vivo!');
 });
 
 })()
