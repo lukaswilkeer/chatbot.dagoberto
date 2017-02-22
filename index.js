@@ -67,11 +67,9 @@
 		let chatId = msg.chat.id;
 
 		return bot.sendMessage(chatId, `
-			Até que vim estou vivo o/ 
-			Ainda não estou 100%, mas todo dia as 18h vou mandar mensagem aqui 
-			pedindo para vocês enviarem as atividades para a @ba_oliveira
-
-			Obrigado por me aceitarem <3
+Até que fim estou vivo o/ 
+Ainda não estou 100%, mas todo dia as 18h vou mandar mensagem aqui pedindo para vocês enviarem as atividades para a @ba_oliveira
+Obrigado por me aceitarem <3
 		`).then(re => {
 			// Start updating message
 
@@ -112,13 +110,16 @@
 
 	bot.on('/durma', msg => {
 
+
+		if (msg.from.id !== 101718483) { // Meu ID !
+			return bot.sendMessage(msg.chat.id, `Só meu criador tem o poder de me mandar dormir`);
+		}
+
 		let chatId = msg.chat.id;
-		
+
 		clearInterval(loop);
 
-		return bot.sendMessage(chatId, `
-			Até depois galera !
-		`)
+		return bot.sendMessage(chatId, ` To indo ! `);
 
 		
 	})
