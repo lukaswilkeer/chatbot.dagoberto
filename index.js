@@ -35,16 +35,6 @@
 		return bot.sendMessage(msg.chat.id, `Olá Mestre!`);
 	});
 
-	bot.on('text', msg => {
-
-
-		if (msg.from.id !== 101718483) { // Meu ID !
-			return bot.sendMessage(msg.chat.id, `Apenas respondo meu mestre!!`);
-		}
-
-		// bot.sendMessage(msg.chat.id, msg.text);
-
-	})
 
 	bot.on('text', (msg) => {
 
@@ -56,28 +46,41 @@
 		if (msg.entities[0].type !== "mention") { return; }
 
 
-		// Será que vai ?
-
+		if (msg.from.id === 101718483) { // Meu ID !
+			bot.sendMessage(msg.chat.id, `<3`);
+		}
+		
 		let mensagem = msg.text.replace("@dagobertoobot ", "");
-		return bot.sendMessage(msg.chat.id, `Olá Mestre! Você disse ${mensagem} ?`);
+		return bot.sendMessage(msg.chat.id, `Desculpa,
+			 Não faço muita coisa ${msg.from.first_name}, mas quem quando eu ficar mais velho`);
 
 
 
 	})
 
+
+	let loop;
+
+
 	bot.on('/viva', msg => {
 
 		let chatId = msg.chat.id;
 
-		return bot.sendMessage(chatId, 'Até que fim !').then(re => {
+		return bot.sendMessage(chatId, `
+			Até que vim estou vivo o/ 
+			Ainda não estou 100%, mas todo dia as 18h vou mandar mensagem aqui 
+			pedindo para vocês enviarem as atividades para a @ba_oliveira
+
+			Obrigado por me aceitarem <3
+		`).then(re => {
 			// Start updating message
 
 			console.log(re);
 
-			let horaemhora = 5000;
+			let horaemhora = 1000*60*30; // de meia em meia hora faz a checagem !
 			let horaAtual = null; 
 
-			setInterval(x => {
+			loop = setInterval(x => {
 
 				horaAtual = new Date()
 								.toTimeString()
@@ -89,19 +92,16 @@
 				
 				// #TODO: Fazer ficar no horário de brasilia !
 				//  Diminuir 3 horas pra ficar certinho ! 
-				if (horaAtual.substr(0,5) == "06:13") {
+				// 21:00 == 18:00 em Sampa ! 
+				if (horaAtual.substr(0,5) == "21:00") {
 
 					console.log(`----------------`)
 					bot.sendMessage(chatId, `
 							Já viu que horas são ? ${horaAtual}
 						`)
 						.catch(error => console.log('Error:', error));
-				}else{
-
-					bot.sendMessage(chatId, `
-							Ainda não...
-						`)
 				}
+
 
 			}, horaemhora);
 
@@ -109,6 +109,19 @@
 		});
 
 	});
+
+	bot.on('/durma', msg => {
+
+		let chatId = msg.chat.id;
+		
+		clearInterval(loop);
+
+		return bot.sendMessage(chatId, `
+			Até depois galera !
+		`)
+
+		
+	})
 
 
 	bot.connect();
