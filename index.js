@@ -24,22 +24,14 @@ bot.on('text', msg => {
 		return bot.sendMessage(msg.chat.id, `Apenas respondo meu mestre!!`);
 	}
 
-	
-	if(msg.text.toLowerCase() === "hey dagoberto"){
-
-		return bot.sendMessage(msg.chat.id, `
-			Oi ${msg.from.first_name}  !
-			o que manda ?
-		`);
-
-	}
-
 	// bot.sendMessage(msg.chat.id, msg.text);
 
 })
 
-bot.on('*', (msg) => {
+bot.on('text', (msg) => {
 
+	console.log(msg);
+	
 	let mensagem = msg.text;
 	let falouComigo = new RegExp(/@dagobertoobot (.+)/).test(mensagem);
 
@@ -52,7 +44,7 @@ bot.on('*', (msg) => {
 
 })
 
-bot.on('/começa', msg => {
+bot.on('/viva', msg => {
 
   return bot.sendMessage(msg.from.id, 'Getting time...').then(re => {
     // Start updating message
