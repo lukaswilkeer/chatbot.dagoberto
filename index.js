@@ -43,6 +43,14 @@ bot.on('text', msg => {
 
 })
 
+bot.onText(/@dagobertoobot (.+)/, (msg, match) => {
+
+
+	console.log(match);
+
+	return bot.sendMessage(msg.chat.id, `Olá Mestre!`);
+})
+
 // bot.on(['*', '/*'], (msg, self) => {
 //   let id = msg.chat.id;
 //   let reply = msg.message_id;
