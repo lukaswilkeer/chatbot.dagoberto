@@ -43,6 +43,28 @@ bot.on(['*', '/*'], (msg, self) => {
 });
 
 
+bot.on('inlineQuery', msg => {
+
+  let query = msg.query;
+  console.log(`inline query: ${ query }`);
+
+  // Create a new answer list object
+  const answers = bot.answerList(msg.id, { cacheTime: 60 });
+
+  // Article
+  answers.addArticle({
+    id: 'query',
+    title: 'Inline Title',
+    description: `Your query: ${ query }`,
+    message_text: 'Click!'
+  });
+
+
+  // Send answers
+  return bot.answerQuery(answers);
+
+});
+
 
 bot.connect();
 
