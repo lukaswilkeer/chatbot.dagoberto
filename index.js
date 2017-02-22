@@ -84,7 +84,7 @@
 
 				console.log(horaAtual)
 
-				if (horaAtual.substr(0,5) == "03:00") {
+				if (horaAtual.substr(0,5) == "03:02") {
 
 					console.log(`----------------`)
 					bot.sendMessage(chatId, `
