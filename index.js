@@ -17,43 +17,17 @@ bot.on('/help', msg => {
   return bot.sendMessage(msg.chat.id, `Olá Mestre!`);
 });
 
+bot.on('text', msg => {
+	if(msg.from.id !== 101718483){ // Meu ID !
+		return bot.sendMessage(msg.chat.id, `Apenas respondo meu mestre!!`);
+	}
 
-// On inline query
-bot.on('inlineQuery', msg => {
+	if(msg.text.toLowerCase() === "hey dagoberto"){
+	 	return bot.sendMessage(msg.chat.id, `No que posso ajudar ?`);
+	}
 
-  let query = msg.query;
-  console.log(`inline query: ${ query }`);
+})
 
-  // Create a new answer list object
-  const answers = bot.answerList(msg.id, { cacheTime: 60 });
-
-  // Article
-  answers.addArticle({
-    id: 'query',
-    title: 'Inline Title',
-    description: `Your query: ${ query }`,
-    message_text: 'Click!'
-  });
-
-  // Photo
-  answers.addPhoto({
-    id: 'photo',
-    caption: 'Telegram logo.',
-    photo_url: 'https://telegram.org/img/t_logo.png',
-    thumb_url: 'https://telegram.org/img/t_logo.png'
-  });
-
-  // Gif
-  answers.addGif({
-    id: 'gif',
-    gif_url: 'https://telegram.org/img/tl_card_wecandoit.gif',
-    thumb_url: 'https://telegram.org/img/tl_card_wecandoit.gif'
-  });
-
-  // Send answers
-  return bot.answerQuery(answers);
-
-});
 
 
 bot.connect();
