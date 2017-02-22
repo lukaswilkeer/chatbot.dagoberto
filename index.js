@@ -21,15 +21,20 @@ bot.on('text', msg => {
 
 	console.info(`Msg `,msg);
 	console.info(`From `,msg.from);
-	console.info(`To `,msg.to);
+	console.info(`To `,msg.chat);
 	
 
 	if(msg.from.id !== 101718483){ // Meu ID !
 		return bot.sendMessage(msg.chat.id, `Apenas respondo meu mestre!!`);
 	}
 
+	console.log(msg.text.toLowerCase());
+
 	if(msg.text.toLowerCase() === "Hey dagoberto"){
-		return bot.sendMessage(msg.chat.id, `Oi ${msg.from.firstName} o que manda?`);
+		return bot.sendMessage(msg.chat.id, `
+			Oi ${msg.from.first_name}  !
+			o que manda ?
+		`);
 	}
 
 	bot.sendMessage(msg.chat.id, msg.text);
