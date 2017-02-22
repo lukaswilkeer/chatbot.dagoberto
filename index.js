@@ -12,22 +12,19 @@
 
 	const port = process.env.PORT || 5000;
 	const express = require('express');
+
+	const JORGEIDTELEGRAM = 101718483;
+	
+
 	const app = express();
 	// Start Express Server
+
 	app.listen(port, () => {
 		console.log(`Express server is listening on ${port}`);
 	});
 
 	app.get("/dev", (req, resp) => { resp.json({ to: "vivo" }) });
 
-
-
-	// bot.on('text', msg => {
-	//   let fromId = msg.from.id;
-	//   let firstName = msg.from.first_name;
-	//   let reply = msg.message_id;
-	//   return bot.sendMessage(fromId, `Welcome, ${ firstName }!`, { reply });
-	// });
 
 	bot.on('/help', msg => {
 		console.log(msg);
@@ -46,13 +43,17 @@
 		if (msg.entities[0].type !== "mention") { return; }
 
 
-		if (msg.from.id === 101718483) { // Meu ID !
+		if (msg.from.id === JORGEIDTELEGRAM) { // Meu ID !
 			bot.sendMessage(msg.chat.id, `<3`);
 		}
 		
 		let mensagem = msg.text.replace("@dagobertoobot ", "");
-		return bot.sendMessage(msg.chat.id, `Desculpa,
-			 Não faço muita coisa ${msg.from.first_name}, mas quem quando eu ficar mais velho`);
+
+		if("bom dia".indexOf(mensagem.toLowerCase())){
+			return bot.sendMessage(msg.chat.id, `Bom dia, ${msg.from.first_name} :D, Já tomou o café dos campeões? `);
+		}
+
+		return bot.sendMessage(msg.chat.id, `Desculpa,Não faço muita coisa ${msg.from.first_name}, mas quem sabe quando eu ficar mais velho`);
 
 
 
@@ -62,15 +63,26 @@
 	let loop;
 
 
-	bot.on('/viva', msg => {
+	bot.on('text', msg => {
+
+		// Não é nenhuma ação, apenas conversa normal
+		if (!msg.entities) { return; }
+
+
+		// Houve uma invocaçào do bot mas não é uma mensão
+		if (msg.entities[0].type !== "mention") { return; }
+
+
+		let mensagem = msg.text.replace("@dagobertoobot ", "");
+
+
+		if (mensagem !== "acorda") { return ; }
+
 
 		let chatId = msg.chat.id;
 
-		return bot.sendMessage(chatId, `
-Até que fim estou vivo o/ 
-Ainda não estou 100%, mas todo dia as 18h vou mandar mensagem aqui pedindo para vocês enviarem as atividades para a @ba_oliveira
-Obrigado por me aceitarem <3
-		`).then(re => {
+		bot.sendMessage(chatId, `Opa o/ \n to aqui pra ajudar!`)
+		.then(re => {
 			// Start updating message
 
 			console.log(re);
@@ -78,7 +90,7 @@ Obrigado por me aceitarem <3
 			let horaemhora = 1000*60*30; // de meia em meia hora faz a checagem !
 			let horaAtual = null; 
 
-			loop = setInterval(x => {
+			loop[0] = setInterval(x => {
 
 				horaAtual = new Date()
 								.toTimeString()
@@ -106,18 +118,49 @@ Obrigado por me aceitarem <3
 
 		});
 
+		if(!loop[1]){ return; } // Se tiver ativado isso não precisa disparar outra véz
+
+		const https = require('https')
+		let vinte_e_cinco_minutos = 1000*60*25 // ~30 minutos;
+
+		loop[1] = setInterval( () => {
+
+			https.get('https://tranquil-shore-86471.herokuapp.com', (res) => {
+				bot.sendMessage(chatId, "Que sono....")
+			}).on('error', (e) => {
+				console.error(e);
+			});
+
+		},vinte_e_cinco_minutos)
+
 	});
 
-	bot.on('/durma', msg => {
+	bot.on('text', msg => {
+
+		// Não é nenhuma ação, apenas conversa normal
+		if (!msg.entities) { return; }
 
 
-		if (msg.from.id !== 101718483) { // Meu ID !
+		// Houve uma invocaçào do bot mas não é uma mensão
+		if (msg.entities[0].type !== "mention") { return; }
+
+
+		let mensagem = msg.text.replace("@dagobertoobot ", "");
+
+
+		if (mensagem !== "vai dormir") { return ; }
+
+
+		if (msg.from.id !== JORGEIDTELEGRAM) { // Meu ID !
 			return bot.sendMessage(msg.chat.id, `Só meu criador tem o poder de me mandar dormir`);
 		}
 
 		let chatId = msg.chat.id;
 
-		clearInterval(loop);
+		loop.forEach((comando) => {
+			clearInterval(comando);
+		})
+		
 
 		return bot.sendMessage(chatId, ` To indo ! `);
 
@@ -125,8 +168,16 @@ Obrigado por me aceitarem <3
 	})
 
 
+	
+
+
+
 	bot.connect();
 
+
+	
+
+	
 
 
 })()
