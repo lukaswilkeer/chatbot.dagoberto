@@ -31,10 +31,12 @@ bot.on('text', msg => {
 	console.log(msg.text.toLowerCase());
 
 	if(msg.text.toLowerCase() === "Hey dagoberto"){
+
 		return bot.sendMessage(msg.chat.id, `
 			Oi ${msg.from.first_name}  !
 			o que manda ?
 		`);
+		
 	}
 
 	bot.sendMessage(msg.chat.id, msg.text);
