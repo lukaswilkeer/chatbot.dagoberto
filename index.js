@@ -85,6 +85,7 @@
 								;
 
 				console.log(horaAtual)
+				console.log(horaAtual.substr(0,5));
 
 				if (horaAtual.substr(0,5) == "03:06") {
 
@@ -94,6 +95,7 @@
 						`)
 						.catch(error => console.log('Error:', error));
 				}else{
+					
 					bot.sendMessage(chatId, `
 							Ainda não...
 						`)
