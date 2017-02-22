@@ -50,21 +50,33 @@ app.listen(port, () => {
 });
 
 // Just to ping!
-bot.on('message', msg => {
-  bot.sendMessage(msg.chat.id, 'I am alive!');
-});
+// bot.on('message', msg => {
+//   bot.sendMessage(msg.chat.id, 'I am alive!');
+// });
 
 bot.onText(/\/echo (.+)/, (msg, match) => {
-  // 'msg' is the received Message from Telegram
-  // 'match' is the result of executing the regexp above on the text content
-  // of the message
 
-  const chatId = msg.chat.id;
+  console.log(msg);
+
+  const chatId = msg.chat.id; // Id do chat que veio a mensagem ! 
   const resp = match[1]; // the captured "whatever"
 
-  // send back the matched "whatever" to the chat
   bot.sendMessage(chatId, resp);
+
 });
 
+bot.onText('Hey Dagoberto', (msg, match) => {
 
-})()
+  console.log(msg);
+
+  const chatId = msg.chat.id; // Id do chat que veio a mensagem ! 
+  const resp = match[1]; // the captured "whatever"
+
+  bot.sendMessage(chatId, resp);
+
+});
+
+bot.sendMessage('I am alive!');
+
+
+})()  
