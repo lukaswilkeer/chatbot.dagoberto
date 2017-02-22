@@ -71,15 +71,13 @@
 			// Start updating message
 
 			let chatId = msg.chat.id;
-			// Update every second
+
+			let horaemhora = 1000 * 60 * 60;
+
 			setInterval(x => {
 
-				let horaemhora = 1000 * 60 * 60;
-				let horaAtual = new Date()
-					.toTimeString()
-					.replace(/.*(\d{2}:\d{2}:\d{2}).*/, '$1');
+				let horaAtual = new Date().toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, '$1');
 
-					
 				if (horaAtual === "02:40:00") {
 
 					bot.sendMessage(chatId, `
@@ -96,13 +94,6 @@
 		});
 
 	});
-
-	function OqueFizeram(chatId, messageId) {
-
-
-
-	}
-
 
 
 	bot.connect();
