@@ -69,7 +69,7 @@
 
 		let chatId = msg.chat.id;
 
-		return bot.sendMessage(, 'Até que fim !').then(re => {
+		return bot.sendMessage(chatId, 'Até que fim !').then(re => {
 			// Start updating message
 
 			console.log(re);
