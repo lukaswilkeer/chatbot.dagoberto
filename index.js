@@ -12,7 +12,7 @@ const bot = new TeleBot('299692951:AAGgYFsiu57O2Th84QPb58aIB21eohdQvEI');
 // });
 
 bot.on('/hello', msg => {
-  let [firstName, lastName] = msg.from.split(' ');
+  let [firstName, lastName] = msg.from;
   return bot.sendMessage(msg.chat.id, `Hello, ${ firstName } ${ lastName }!`);
 });
 
