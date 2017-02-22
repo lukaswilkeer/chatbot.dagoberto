@@ -40,7 +40,10 @@ bot.on('text', msg => {
 bot.on('text', (msg) => {
 
 	console.log(msg);
-	console.log(msg.entities[0].type);
+	if(msg.entities){
+		console.log(msg.entities[0].type);
+	}
+	
 
 
 	let mensagem = msg.text;
