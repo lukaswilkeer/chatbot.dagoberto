@@ -12,8 +12,8 @@ const bot = new TeleBot('299692951:AAGgYFsiu57O2Th84QPb58aIB21eohdQvEI');
 // });
 
 bot.on('/hello', msg => {
-  let [cmdName, firstName, lastName] = msg.text.split(' ');
-  return bot.sendMessage(msg.from.id, `Hello, ${ firstName } ${ lastName }!`);
+  let [firstName, lastName] = msg.from.split(' ');
+  return bot.sendMessage(msg.chat.id, `Hello, ${ firstName } ${ lastName }!`);
 });
 
 
