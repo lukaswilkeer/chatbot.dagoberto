@@ -76,7 +76,6 @@ bot.onText('Hey Dagoberto', (msg, match) => {
 
 });
 
-bot.sendMessage('I am alive!');
 
 
 })()  
