@@ -78,7 +78,7 @@
 
 				let horaAtual = new Date().toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, '$1');
 
-				if (horaAtual === "02:40:00") {
+				if (horaAtual === "02:45:00") {
 
 					bot.sendMessage(chatId, `
 							Galera, o que fizeram hoje?  
