@@ -7,9 +7,18 @@ const bot = new TeleBot({
   sleep: 1000, // Optional. How often check updates (in ms).
   timeout: 0, // Optional. Update pulling timeout (0 - short polling).
   limit: 100, // Optional. Limits the number of updates to be retrieved.
-  retryTimeout: 5000, // Optional. Reconnecting timeout (in ms).
-  port: process.env.PORT || 5000
+  retryTimeout: 5000 // Optional. Reconnecting timeout (in ms).
 });
+
+const port = process.env.PORT || 5000;
+const express = require('express');
+const app = express();
+// Start Express Server
+app.listen(port, () => {
+  console.log(`Express server is listening on ${port}`);
+});
+
+app.get("/dev",(req,resp) => { resp.json({ to:"vivo"})} );
 
 
 
@@ -39,22 +48,18 @@ bot.on('text', msg => {
 
 bot.on('text', (msg) => {
 
-	console.log(msg);
-	if(msg.entities){
-		console.log(msg.entities[0].type);
-	}
+	// Não é nenhuma ação, apenas conversa normal
+	if(!msg.entities){ return ; }
+
+
+	// Houve uma invocaçào do bot mas não é uma mensão
+	if(msg.entities[0].type !== "mention"){ return; }
 	
 
+	// Será que vai ?
 
-	let mensagem = msg.text;
-	let falouComigo = new RegExp(/@dagobertoobot (.+)/).test(mensagem);
-
-	if(falouComigo){
-		mensagem = mensagem.replace("@dagobertoobot ","");
-		return bot.sendMessage(msg.chat.id, `Olá Mestre! Você disse ${mensagem} ?`);
-	}else{
-		return bot.sendMessage(msg.chat.id, `Não deu certo =/ não desiste`);
-	}
+	let mensagem = msg.text.replace("@dagobertoobot ","");
+	return bot.sendMessage(msg.chat.id, `Olá Mestre! Você disse ${mensagem} ?`);
 
 	
 
