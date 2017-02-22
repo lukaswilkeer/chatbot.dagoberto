@@ -25,45 +25,28 @@ bot.on('text', msg => {
 	
 
 	if(msg.from.id !== 101718483){ // Meu ID !
-		bot.sendMessage(msg.chat.id, `Apenas respondo meu mestre!!`);
+		return bot.sendMessage(msg.chat.id, `Apenas respondo meu mestre!!`);
+	}
+
+	if(msg.text.toLowerCase() === "Hey dagoberto"){
+		return bot.sendMessage(msg.chat.id, `Oi ${msg.from.firstName} o que manda?`);
 	}
 
 	bot.sendMessage(msg.chat.id, msg.text);
 
 })
 
-bot.on(['*', '/*'], (msg, self) => {
-  let id = msg.chat.id;
-  let reply = msg.message_id;
-  let type = self.type;
-  let parse = 'html';
-  return bot.sendMessage(
-    id, `This is a <b>${ type }</b> message.`, { reply, parse }
-  );
-});
+// bot.on(['*', '/*'], (msg, self) => {
+//   let id = msg.chat.id;
+//   let reply = msg.message_id;
+//   let type = self.type;
+//   let parse = 'html';
+//   return bot.sendMessage(
+//     id, `This is a <b>${ type }</b> message.`, { reply, parse }
+//   );
+// });
 
 
-bot.on('inlineQuery', msg => {
-
-  let query = msg.query;
-  console.log(`inline query: ${ query }`);
-
-  // Create a new answer list object
-  const answers = bot.answerList(msg.id, { cacheTime: 60 });
-
-  // Article
-  answers.addArticle({
-    id: 'query',
-    title: 'Inline Title',
-    description: `Your query: ${ query }`,
-    message_text: 'Click!'
-  });
-
-
-  // Send answers
-  return bot.answerQuery(answers);
-
-});
 
 
 bot.connect();
