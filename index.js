@@ -72,7 +72,7 @@
 
 			console.log(re);
 
-			let horaemhora = 1000;
+			let horaemhora = 5000;
 			let horaAtual = null; 
 
 			setInterval(x => {
@@ -84,12 +84,17 @@
 
 				console.log(horaAtual)
 
-				if (horaAtual === "02:55:00") {
+				if (horaAtual.substr(0,5) == "03:00") {
 
+					console.log(`----------------`)
 					bot.sendMessage(chatId, `
 							Já viu que horas são ? ${horaAtual}
 						`)
 						.catch(error => console.log('Error:', error));
+				}else{
+					bot.sendMessage(chatId, `
+							Ainda não...
+						`)
 				}
 
 			}, horaemhora);
