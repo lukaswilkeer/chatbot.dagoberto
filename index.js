@@ -38,10 +38,17 @@ bot.on('text', msg => {
 
 })
 
-bot.on(/@dagobertoobot (.+)/, (msg, match) => {
+bot.on('*', (msg) => {
 
-	console.log(match);
-	return bot.sendMessage(msg.chat.id, `Olá Mestre!`);
+	let mensagem = msg.text;
+	let falouComigo = new RegExp(/@dagobertoobot (.+)/).test(mensagem);
+
+	if(falouComigo){
+		mensagem = mensagem.replace("@dagobertoobot ","");
+		return bot.sendMessage(msg.chat.id, `Olá Mestre! Você disse ${mensagem} ?`);
+	}
+
+	
 
 })
 
