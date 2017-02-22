@@ -2,7 +2,16 @@
 
 	
 const TeleBot = require('telebot');
-const bot = new TeleBot('299692951:AAGgYFsiu57O2Th84QPb58aIB21eohdQvEI');
+const bot = new TeleBot({
+  token: '299692951:AAGgYFsiu57O2Th84QPb58aIB21eohdQvEI', // Required.
+  sleep: 1000, // Optional. How often check updates (in ms).
+  timeout: 0, // Optional. Update pulling timeout (0 - short polling).
+  limit: 100, // Optional. Limits the number of updates to be retrieved.
+  retryTimeout: 5000, // Optional. Reconnecting timeout (in ms).
+  port: process.env.PORT || 5000
+});
+
+
 
 // bot.on('text', msg => {
 //   let fromId = msg.from.id;
@@ -31,13 +40,17 @@ bot.on('text', msg => {
 bot.on('text', (msg) => {
 
 	console.log(msg);
-	
+	console.log(msg.entities[0].type);
+
+
 	let mensagem = msg.text;
 	let falouComigo = new RegExp(/@dagobertoobot (.+)/).test(mensagem);
 
 	if(falouComigo){
 		mensagem = mensagem.replace("@dagobertoobot ","");
 		return bot.sendMessage(msg.chat.id, `Olá Mestre! Você disse ${mensagem} ?`);
+	}else{
+		return bot.sendMessage(msg.chat.id, `Não deu certo =/ não desiste`);
 	}
 
 	
