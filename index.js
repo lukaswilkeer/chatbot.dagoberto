@@ -89,7 +89,7 @@
 				
 				// #TODO: Fazer ficar no horário de brasilia !
 				//  Diminuir 3 horas pra ficar certinho ! 
-				if (horaAtual.substr(0,5) == "06:11") {
+				if (horaAtual.substr(0,5) == "06:13") {
 
 					console.log(`----------------`)
 					bot.sendMessage(chatId, `
