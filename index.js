@@ -19,17 +19,12 @@ bot.on('/help', msg => {
 
 bot.on('text', msg => {
 
-	console.info(`Msg `,msg);
-	console.info(`From `,msg.from);
-	console.info(`To `,msg.chat);
 	
-
 	if(msg.from.id !== 101718483){ // Meu ID !
 		return bot.sendMessage(msg.chat.id, `Apenas respondo meu mestre!!`);
 	}
 
-	console.log(msg.text.toLowerCase());
-
+	
 	if(msg.text.toLowerCase() === "hey dagoberto"){
 
 		return bot.sendMessage(msg.chat.id, `
@@ -39,15 +34,15 @@ bot.on('text', msg => {
 
 	}
 
-	bot.sendMessage(msg.chat.id, msg.text);
+	// bot.sendMessage(msg.chat.id, msg.text);
 
 })
 
-bot.onText(/@dagobertoobot (.+)/, (msg, match) => {
+bot.on(/@dagobertoobot (.+)/, (msg, match) => {
 
 	console.log(match);
 	return bot.sendMessage(msg.chat.id, `Olá Mestre!`);
-	
+
 })
 
 bot.on('/começa', msg => {
