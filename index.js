@@ -45,23 +45,35 @@ bot.on('text', msg => {
 
 bot.onText(/@dagobertoobot (.+)/, (msg, match) => {
 
-
 	console.log(match);
-
 	return bot.sendMessage(msg.chat.id, `Olá Mestre!`);
+	
 })
 
-// bot.on(['*', '/*'], (msg, self) => {
-//   let id = msg.chat.id;
-//   let reply = msg.message_id;
-//   let type = self.type;
-//   let parse = 'html';
-//   return bot.sendMessage(
-//     id, `This is a <b>${ type }</b> message.`, { reply, parse }
-//   );
-// });
+bot.on('/começa', msg => {
 
+  return bot.sendMessage(msg.from.id, 'Getting time...').then(re => {
+    // Start updating message
+    updateTime(msg.from.id, re.result.message_id);
+  });
 
+});
+
+function updateTime(chatId, messageId) {
+
+  // Update every second
+  setInterval(x => {
+    bot.editText(
+      { chatId, messageId }, `<b>Current time:</b> ${ time() }`,
+      { parse: 'html' }
+    ).catch(error => console.log('Error:', error));
+  }, 1000);
+
+}
+
+function time() {
+  return new Date().toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, '$1');
+}
 
 
 bot.connect();
