@@ -108,20 +108,14 @@ bot.on('inlineQuery', msg => {
     message_text: 'Click!'
   });
 
-  // Photo
-  answers.addPhoto({
-    id: 'photo',
-    caption: 'Telegram logo.',
-    photo_url: 'https://telegram.org/img/t_logo.png',
-    thumb_url: 'https://telegram.org/img/t_logo.png'
+  answers.addArticle({
+    id: 'opa',
+    title: 'Inline Title 2',
+    description: `Para falar comigo, só me citar quando for falar`,
+    message_text: 'Valeu!'
   });
 
-  // Gif
-  answers.addGif({
-    id: 'gif',
-    gif_url: 'https://telegram.org/img/tl_card_wecandoit.gif',
-    thumb_url: 'https://telegram.org/img/tl_card_wecandoit.gif'
-  });
+  
 
   // Send answers
   return bot.answerQuery(answers);
