@@ -87,8 +87,9 @@
 				console.log(horaAtual)
 				console.log(horaAtual.substr(0,5));
 				
-
-				if (horaAtual.substr(0,5) == "03:08") {
+				// #TODO: Fazer ficar no horário de brasilia !
+				//  Diminuir 3 horas pra ficar certinho ! 
+				if (horaAtual.substr(0,5) == "06:11") {
 
 					console.log(`----------------`)
 					bot.sendMessage(chatId, `
