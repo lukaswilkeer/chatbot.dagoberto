@@ -18,6 +18,14 @@ bot.on('/help', msg => {
 });
 
 bot.on('text', msg => {
+	console.info(`
+
+
+		${msg}
+
+
+
+	`);
 	if(msg.from.id !== 101718483){ // Meu ID !
 		return bot.sendMessage(msg.chat.id, `Apenas respondo meu mestre!!`);
 	}
