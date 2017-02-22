@@ -18,23 +18,16 @@ bot.on('/help', msg => {
 });
 
 bot.on('text', msg => {
-	
-	console.info(`
 
-
-		${msg}
-
-
-
-	`);
+	console.info(`From `,from);
+	console.info(`To `,to);
+	console.info(`Msg `,msg);
 
 	if(msg.from.id !== 101718483){ // Meu ID !
-		return bot.sendMessage(msg.chat.id, `Apenas respondo meu mestre!!`);
+		bot.sendMessage(msg.chat.id, `Apenas respondo meu mestre!!`);
 	}
 
-	if(msg.text.toLowerCase() === "hey dagoberto"){
-	 	return bot.sendMessage(msg.chat.id, `No que posso ajudar ?`);
-	}
+	bot.sendMessage(msg.chat.id, msg.text);
 
 })
 
