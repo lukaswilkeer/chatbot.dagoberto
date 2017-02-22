@@ -100,22 +100,14 @@ bot.on('inlineQuery', msg => {
   // Create a new answer list object
   const answers = bot.answerList(msg.id, { cacheTime: 60 });
 
-  // Article
-  answers.addArticle({
-    id: 'query',
-    title: 'Inline Title',
-    description: `Your query: ${ query }`,
-    message_text: 'Click!'
-  });
-
-  answers.addArticle({
-    id: 'opa',
-    title: 'Inline Title 2',
-    description: `Para falar comigo, só me citar quando for falar`,
-    message_text: 'Valeu!'
-  });
-
-  
+  if(query.indexOf("O que tenho para hoje ?") >= 0){
+	answers.addArticle({
+		id: '1',
+		title: 'Fica a dica',
+		description: `Para falar comigo, só me citar quando for falar`,
+		message_text: 'Isso ai ;) !'
+	});
+  }
 
   // Send answers
   return bot.answerQuery(answers);
