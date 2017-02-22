@@ -68,7 +68,7 @@
 	bot.on('/viva', msg => {
 
 		let chatId = msg.chat.id;
-		
+
 		return bot.sendMessage(, 'Até que fim !').then(re => {
 			// Start updating message
 
@@ -86,7 +86,7 @@
 
 				console.log(horaAtual)
 
-				if (horaAtual.substr(0,5) == "03:02") {
+				if (horaAtual.substr(0,5) == "03:04") {
 
 					console.log(`----------------`)
 					bot.sendMessage(chatId, `
