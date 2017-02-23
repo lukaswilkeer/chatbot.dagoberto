@@ -36,6 +36,8 @@
 
 			// Chat ID da mensagem.
 			let chatId = msg.chat.id;
+			
+			console.log(msg)
 
 			dagoberto.sendMessage(chatId, `Opa o/ \n to aqui pra ajudar!`)
 				.then((re) => {
