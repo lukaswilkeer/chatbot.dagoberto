@@ -32,7 +32,7 @@
 			let mensagem = msg.text.replace("@dagobertoobot", "");
 
 			// Tem a palavra Acorda na mensagem !
-			if (mensagem.toLowerCase().indexOf("acorda") >= 0) { return; }
+			if (mensagem.toLowerCase().indexOf("acorda") < 0) { return; }
 
 			// Chat ID da mensagem.
 			let chatId = msg.chat.id;
@@ -115,8 +115,8 @@
 
 			let mensagem = msg.text.replace("@dagobertoobot ", "");
 
-
-			if (mensagem.toLowerCase() !== "documentos por favor") { return; }
+			console.log(mensagem)
+			if (mensagem.toLowerCase() !== "seus documentos") { return; }
 
 			let chatId = msg.chat.id;
 

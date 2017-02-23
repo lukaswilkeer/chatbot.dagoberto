@@ -20,7 +20,7 @@
 
 			let mensagem = msg.text.replace("@dagobertoobot ", "");
 
-			if ("bom dia".indexOf(mensagem.toLowerCase())) {
+			if ("bom dia".indexOf(mensagem.toLowerCase() >= 0)) {
 				return dagoberto.sendMessage(msg.chat.id, `Bom dia, ${msg.from.first_name} :D, Já tomou o café dos campeões? `);
 			}
 
