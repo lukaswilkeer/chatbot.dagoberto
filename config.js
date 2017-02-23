@@ -6,6 +6,9 @@
 
 	const port = process.env.PORT || 5000;
 	const app = express();
+	const dotenv = require('dotenv');
+
+	dotenv.load();
 
 	
 	const bot = new TeleBot({
