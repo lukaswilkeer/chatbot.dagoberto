@@ -19,7 +19,7 @@
 		retryTimeout: 5000 // Optional. Reconnecting timeout (in ms).
 	});
 	
-	bot.connecct(); // Iniciando o Dagoberto	
+	bot.connect(); // Iniciando o Dagoberto	
 
 	const onStart = () => {
 
