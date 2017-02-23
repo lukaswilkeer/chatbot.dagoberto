@@ -35,7 +35,7 @@
 			
 		let vinte_e_cinco_minutos = 1000 * 60 * 25 // ~30 minutos;
 
-		cmd = setInterval(() => {
+		let cmd = setInterval(() => {
 
 			https.get('https://tranquil-shore-86471.herokuapp.com', (res) => {
 				bot.sendMessage(chatId, "Que sono....")
