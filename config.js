@@ -26,15 +26,14 @@
 			console.log(`Express server is listening on ${port}`);
 		});
 
+		app.get("/dev", (req, resp) => { resp.json({ to: "vivo" }) });
+
 		bot.connecct(); // Iniciando o Dagoberto	
 
 
-		// Se tiver ativado isso não precisa disparar outra véz
-		if (!commandos_ativos[1]) { return; } 
-
 			
 		let vinte_e_cinco_minutos = 1000 * 60 * 25 // ~30 minutos;
-		commandos_ativos[1] = setInterval(() => {
+		cmd = setInterval(() => {
 
 			https.get('https://tranquil-shore-86471.herokuapp.com', (res) => {
 				bot.sendMessage(chatId, "Que sono....")
@@ -43,12 +42,14 @@
 			});
 
 		}, vinte_e_cinco_minutos)
+
+
+		require('./code/comandos.talks').Add(cmd);
 	}
 
 
 	module.exports = {
-		Load : onLoad
-	,   Start : onStart
+	   Start : onStart
 	,	bot : bot
 	};
 })()
