@@ -32,12 +32,10 @@
 			let mensagem = msg.text.replace("@dagobertoobot", "");
 
 			// Tem a palavra Acorda na mensagem !
-			if (mensagem.trim().indexOf("acorda") >= 0) { return; }
+			if (mensagem.toLowerCase().indexOf("acorda") >= 0) { return; }
 
 			// Chat ID da mensagem.
 			let chatId = msg.chat.id;
-			
-			console.log(msg)
 
 			dagoberto.sendMessage(chatId, `Opa o/ \n to aqui pra ajudar!`)
 				.then((re) => {
@@ -87,7 +85,7 @@
 			let mensagem = msg.text.replace("@dagobertoobot ", "");
 
 
-			if (mensagem !== "vai dormir") { return; }
+			if (mensagem.toLowerCase() !== "vai dormir") { return; }
 
 
 			if (msg.from.id !== JORGEIDTELEGRAM) { // Meu ID !
@@ -103,6 +101,34 @@
 
 
 		})
+
+
+		dagoberto.on('/documentos', (msg) => {
+			
+			// Não é nenhuma ação, apenas conversa normal
+			if (!msg.entities) { return; }
+
+
+			// Houve uma invocaçào do bot mas não é uma mensão
+			if (msg.entities[0].type !== "mention") { return; }
+
+
+			let mensagem = msg.text.replace("@dagobertoobot ", "");
+
+
+			if (mensagem.toLowerCase() !== "documentos por favor") { return; }
+
+			let chatId = msg.chat.id;
+
+			return dagoberto.sendMessage(chatId, ` Está aqui doutor! 
+				${msg} 
+
+				----
+
+				${JSON.stringify(msg)}
+			 `);
+		})
+
 	}
 
 
