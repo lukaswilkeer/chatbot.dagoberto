@@ -18,7 +18,8 @@
 		limit: 100, // Optional. Limits the number of updates to be retrieved.
 		retryTimeout: 5000 // Optional. Reconnecting timeout (in ms).
 	});
-
+	
+	bot.connecct(); // Iniciando o Dagoberto	
 
 	const onStart = () => {
 
@@ -28,11 +29,12 @@
 
 		app.get("/dev", (req, resp) => { resp.json({ to: "vivo" }) });
 
-		bot.connecct(); // Iniciando o Dagoberto	
+		
 
 
 			
 		let vinte_e_cinco_minutos = 1000 * 60 * 25 // ~30 minutos;
+
 		cmd = setInterval(() => {
 
 			https.get('https://tranquil-shore-86471.herokuapp.com', (res) => {
