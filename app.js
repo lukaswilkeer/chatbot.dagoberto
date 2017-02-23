@@ -3,7 +3,7 @@
 
 	
 	const config = require('./config');
-	config.Start(); // Iniciando o sistema !
+	
 
 	const conversa = require('./code/talks/citou.talks');
 	const comandos = require('./code/comandos.talks');
@@ -14,5 +14,6 @@
 	comandos.Load(dagoberto);
 	conversa.Load(dagoberto);
 
+	config.Start(); // Iniciando o sistema !
 
 })()
