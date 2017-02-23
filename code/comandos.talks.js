@@ -6,15 +6,15 @@
 
 	const cmd_list = [];
 
-	const onAdd = (cmd) => { comandos_em_loop.push(cmd); }
+	const onAdd = (cmd) => { cmd_list.push(cmd); }
 
 	const onClear = (cmd) => {
-		comandos_em_loop[cmd] = null;
+		cmd_list[cmd] = null;
 		return clearInterval(cmd);
 	}
 
 	const onClearAll = () => {
-		return comandos_em_loop.forEach((cmd) => { limpar_comandos(cmd) })
+		return cmd_list.forEach((cmd) => { limpar_comandos(cmd) })
 	}
 
 	const onLoad = (dagoberto) => {
