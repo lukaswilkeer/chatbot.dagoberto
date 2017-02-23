@@ -103,7 +103,7 @@
 		})
 
 
-		dagoberto.on('/documentos', (msg) => {
+		dagoberto.on('text', (msg) => {
 			
 			// Não é nenhuma ação, apenas conversa normal
 			if (!msg.entities) { return; }
