@@ -32,7 +32,6 @@
 		app.get("/dev", (req, resp) => {
 
 			resp.json({
-				config: req,
 				envs: process.env
 			})
 
