@@ -1,4 +1,6 @@
 (() => {
+
+
 	'use strict';
 	const express = require('express');
 	const TeleBot = require('telebot');
@@ -10,7 +12,7 @@
 
 	dotenv.load();
 
-	
+
 	const bot = new TeleBot({
 		token: process.env.TOKENTELEGRAM, // Required.
 		sleep: 1000, // Optional. How often check updates (in ms).
@@ -18,7 +20,7 @@
 		limit: 100, // Optional. Limits the number of updates to be retrieved.
 		retryTimeout: 5000 // Optional. Reconnecting timeout (in ms).
 	});
-	
+
 	bot.connect(); // Iniciando o Dagoberto	
 
 	const onStart = () => {
@@ -29,29 +31,17 @@
 
 		app.get("/dev", (req, resp) => { resp.json({ to: "vivo" }) });
 
-		
+		app.get("/", (req, resp) => {
+			resp.redirect('/dev');
+		})
 
-
-			
-		let vinte_e_cinco_minutos = 1000 * 60 * 25 // ~30 minutos;
-
-		let cmd = setInterval(() => {
-
-			https.get('https://tranquil-shore-86471.herokuapp.com', (res) => {
-				bot.sendMessage(chatId, "Que sono....")
-			}).on('error', (e) => {
-				console.error(e);
-			});
-
-		}, vinte_e_cinco_minutos)
-
-
-		require('./code/comandos.talks').Add(cmd);
 	}
 
 
 	module.exports = {
-	   Start : onStart
-	,	bot : bot
+		Start: onStart
+		, bot: bot
 	};
-})()
+
+
+})();
