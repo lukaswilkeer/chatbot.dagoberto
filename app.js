@@ -8,7 +8,7 @@
 	const comandos = require('./code/comandos.talks');
 	const dagoberto = config.bot
 
-	conversa.Load(dagoberto);
+	comandos.Load(dagoberto);
 
 	config.Start(); // Iniciando o sistema !
 

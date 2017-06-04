@@ -29,7 +29,14 @@
 			console.log(`Express server is listening on ${port}`);
 		});
 
-		app.get("/dev", (req, resp) => { resp.json({ to: "vivo" }) });
+		app.get("/dev", (req, resp) => {
+
+			resp.json({
+				config: req,
+				envs: process.env
+			})
+
+		});
 
 		app.get("/", (req, resp) => {
 			resp.redirect('/dev');
