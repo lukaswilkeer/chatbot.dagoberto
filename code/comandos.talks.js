@@ -1,54 +1,33 @@
-(() => {
+const commands = ['/start', '/help', '/pomodoro', '/leandboard'];
 
+const talks = () => {
+	const wakatime = () => console.log('pipico ta morrendo')
 
-	const onLoad = (dagoberto) => {
-
-		dagoberto.on('text', (msg) => {
-
-			console.log(msg);
-
-			// Não é nenhuma ação, apenas conversa normal
-			if (!msg.entities) { return; }
-
-			// Houve uma invocaçào do bot mas não é uma mensão
-			if (msg.entities[0].type !== "mention") { return; }
-
-			// Mensão de outras pessoas, mas não do Dagoberto.
-			if (msg.text.indexOf("@dagobertoobot") < 0) { return; }
-
-			let mensagem = msg.text.replace("@dagobertoobot ", "");
-
-			let chatId = msg.chat.id;
-
-
-			switch (mensagem) {
-
-				case 'dados':
-					dagoberto.sendMessage(chatId, ` Está aqui doutor!  ${msg}  \n ----\n ${JSON.stringify(msg)} `);
-					break;
-				case 'horas':
-					dagoberto.sendMessage(chatId, ` Agora são no servidor : ${new Date()}`);
-
-					break;
-
-				default:
-					dagoberto.sendMessage(chatId, `Desculpem, ${msg.from.first_name} ainda estou em construção`);
-					break
-
-			}
-
-
-
-		})
-
+	return {
+		'leandboard': {
+			sentences: ['leandboard', 'wakatime'],
+			action: wakatime
+		}, 
+		
+		'hello': {
+			sentences: ['hello'],
+			action: () => {console.log('hello')}
+		}
 	}
+}
 
+// process :: Object -> Response
+const process = (msg) => {
+	const knowledge = talks()
+	const text = msg.text
+}
 
+const botMention = (text) => text.indexOf('dagoberta') == 0 ? true : false
 
+const onLoad = (dagoberto) => {
+	dagoberto.on('text', (msg) => botMention(msg.text) ? process(msg) : false)
+}
 
-
-	module.exports = {
-		Load: onLoad
-	}
-
-})()
+module.exports = {
+	Load: onLoad
+}
