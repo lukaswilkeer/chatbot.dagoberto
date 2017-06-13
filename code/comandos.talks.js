@@ -1,6 +1,10 @@
-const commands = ['/start', '/help', '/pomodoro', '/leandboard'];
+/* Type
+Command: Object { sentences: String, action: Function }
+*/
 
-const talks = () => {
+//const commands = ['/start', '/help', '/pomodoro', '/leandboard'];
+
+const wakatimeModule = () => {
 	const wakatime = () => console.log('pipico ta morrendo')
 
 	return {
@@ -16,18 +20,49 @@ const talks = () => {
 	}
 }
 
-// process :: Object -> Response
-const process = (msg) => {
-	const knowledge = talks()
-	const text = msg.text
+const debug = (x) => console.log(x)
+
+// isCommand :: String -> String -> Boolean
+const isCommand = (commands) => (sentence) => msg == sentence ? true : false;
+
+// checkCommands :: Module, [String] -> Bololean
+const checkCommand = (module) => (command) => {
+	console.log(module)
+	console.log('teste aqui')
+	module.filter((fn) => )
 }
 
-const botMention = (text) => text.indexOf('dagoberta') == 0 ? true : false
+// findCommand :: Module -> [String] -> [Maybe Command]
+const findCommand = (module) => (maybeCommands) => {
+	// Caso haja alguma sentenca que bata com o commando retorna a sunção
+	//Object.keys(module).map((fn) => checkCommands(fn)(commands))
+	maybeCommands.map((maybeCommand) => checkCommand(module)(maybeCommand))
+}
+
+// process :: Object -> Responsegjt
+const process = (msg) => {
+	const modules = [wakatimeModule()]
+	const text = msg.text.split(' ')
+	const maybeCommands = text.slice(1, text.length)
+	
+	const commands = modules.map((module) => findCommand(module)(maybeCommands))
+}
+
+// botMention :: [String] -> Boolean
+const botMention = (text) => text.split(' ')[0] == 'dagoberta' ? true : false
 
 const onLoad = (dagoberto) => {
-	dagoberto.on('text', (msg) => botMention(msg.text) ? process(msg) : false)
+	dagoberto.on('text', (msg) => {
+		console.log('msg: ', msg.text)
+		botMention(msg.text) ? process(msg) : false
+	})
 }
 
 module.exports = {
-	Load: onLoad
+	Load: onLoad,
+	isCommand: isCommand,
+	findCommand: findCommand,
+	botMention: botMention,
+	talks: wakatimeModule,
+	process: process
 }

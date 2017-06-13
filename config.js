@@ -14,7 +14,8 @@
 
 
 	const bot = new TeleBot({
-		token: process.env.TOKENTELEGRAM, // Required.
+		//token: process.env.TOKENTELEGRAM, // Required.
+		token: '306544794:AAHC6J_M-E7gy60d9d7Axc-EufYN483DMLM',
 		sleep: 1000, // Optional. How often check updates (in ms).
 		timeout: 0, // Optional. Update pulling timeout (0 - short polling).
 		limit: 100, // Optional. Limits the number of updates to be retrieved.
