@@ -14,7 +14,7 @@ const wakatimeModule = () => {
 		}, 
 		
 		'hello': {
-			sentences: ['hello'],
+			sentences: ['acorda!'],
 			action: () => {console.log('hello')}
 		}
 	}
@@ -23,20 +23,21 @@ const wakatimeModule = () => {
 const debug = (x) => console.log(x)
 
 // isCommand :: String -> String -> Boolean
-const isCommand = (commands) => (sentence) => msg == sentence ? true : false;
+const isCommand = (command) => (sentence) => command == sentence ? true : false;
 
 // checkCommands :: Module, [String] -> Bololean
-const checkCommand = (module) => (command) => {
-	console.log(module)
-	console.log('teste aqui')
-	module.filter((fn) => )
+const checkCommand = (module, maybeCommand) => {
+	const hasCommand = isCommand(maybeCommand)
+	Object.keys(module).map((fn) => {
+		let response = module[fn].sentences.filter(hasCommand)
+		return response ? true : false
+	})	
 }
 
 // findCommand :: Module -> [String] -> [Maybe Command]
 const findCommand = (module) => (maybeCommands) => {
-	// Caso haja alguma sentenca que bata com o commando retorna a sunção
-	//Object.keys(module).map((fn) => checkCommands(fn)(commands))
-	maybeCommands.map((maybeCommand) => checkCommand(module)(maybeCommand))
+	const result = maybeCommands.filter((maybeCommand) => checkCommand(module, maybeCommand))
+	return result
 }
 
 // process :: Object -> Responsegjt
@@ -46,6 +47,7 @@ const process = (msg) => {
 	const maybeCommands = text.slice(1, text.length)
 	
 	const commands = modules.map((module) => findCommand(module)(maybeCommands))
+	return commands
 }
 
 // botMention :: [String] -> Boolean
@@ -53,7 +55,6 @@ const botMention = (text) => text.split(' ')[0] == 'dagoberta' ? true : false
 
 const onLoad = (dagoberto) => {
 	dagoberto.on('text', (msg) => {
-		console.log('msg: ', msg.text)
 		botMention(msg.text) ? process(msg) : false
 	})
 }
