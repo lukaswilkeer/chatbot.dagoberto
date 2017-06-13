@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
-    "start_test": "nodemon --debug-brk app.js",
+    "start": "nodemon --debug-brk app.js",
     "test": "mocha tests --recursive"
   },
   "repository": {
@@ -24,5 +23,8 @@
     "express": "^4.14.1",
     "node-telegram-bot-api": "^0.27.0",
     "telebot": "^1.0.7"
+  },
+  "devDependencies": {
+    "mocha": "^3.4.2"
   }
 }
