@@ -6,7 +6,7 @@ const bot = require ('../code/comandos.talks.js');
 describe ('bot mention', () => {
   it('sumon bot from hell:', (done) => {
     const msg = {text: 'dagoberta acorda!'}
-    bot.botMention(msg.text) ? bot.process(msg) : false
+    const response = bot.botMention(msg.text) ? bot.process(msg) : false
     done()
   })
 

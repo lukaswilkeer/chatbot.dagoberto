@@ -16,6 +16,17 @@
       "port": 5858
     },
     {
+      "type": "node",
+      "request": "launch",
+      "name": "Test via NPM",
+      "runtimeExecutable": "npm",
+      "windows": {
+        "runtimeExecutable": "npm.cmd"
+      },
+      "runtimeArgs": ["test"],
+      "port": 5858
+    },
+    {
       "name": "Run mocha",
       "type": "node",
       "request": "launch",
