@@ -1,53 +1,16 @@
-/* Type
-Command: Object { sentences: String, action: Function }
-*/
-
-//const commands = ['/start', '/help', '/pomodoro', '/leandboard'];
-
-const wakatimeModule = () => {
-	const wakatime = () => console.log('pipico ta morrendo')
-
-	return {
-		'leandboard': {
-			sentences: ['leandboard', 'wakatime'],
-			action: wakatime
-		}, 
-		
-		'hello': {
-			sentences: ['acorda!'],
-			action: () => {console.log('hello')}
-		}
-	}
-}
+const cerbero = require('./cerbero.js')
+const hello = require('../code/modules/hello')
 
 const debug = (x) => console.log(x)
 
-// isCommand :: String -> String -> Boolean
-const isCommand = (command) => (sentence) => command == sentence ? true : false;
-
-// checkCommands :: Module, [String] -> Bololean
-const checkCommand = (module, maybeCommand) => {
-	const hasCommand = isCommand(maybeCommand)
-	Object.keys(module).map((fn) => {
-		let response = module[fn].sentences.filter(hasCommand)
-		return response ? true : false
-	})	
-}
-
-// findCommand :: Module -> [String] -> [Maybe Command]
-const findCommand = (module) => (maybeCommands) => {
-	const result = maybeCommands.filter((maybeCommand) => checkCommand(module, maybeCommand))
-	return result
-}
-
-// process :: Object -> Responsegjt
+// process :: Object -> Response
 const process = (msg) => {
-	const modules = [wakatimeModule()]
+	// TODO: Adicionar função para pegar todos os módulos
+	const modulesList = [hello]
 	const text = msg.text.split(' ')
 	const maybeCommands = text.slice(1, text.length)
-	
-	const commands = modules.map((module) => findCommand(module)(maybeCommands))
-	return commands
+	const queue = cerbero(maybeCommands, modulesList)
+	return queue
 }
 
 // botMention :: [String] -> Boolean
@@ -61,9 +24,6 @@ const onLoad = (dagoberto) => {
 
 module.exports = {
 	Load: onLoad,
-	isCommand: isCommand,
-	findCommand: findCommand,
 	botMention: botMention,
-	talks: wakatimeModule,
 	process: process
 }
