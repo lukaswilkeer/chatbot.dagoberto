@@ -19,7 +19,7 @@ const checkModule = (module, commands) => {
 
 // queue :: [String] -> [Object] -> [Function]
 const queue = (commands, modulesList) => {
-  return modulesList.map((module) => checkModule(module)(commands))
+  return modulesList.map((module) => checkModule(module, commands))
 }
 
 module.exports = queue

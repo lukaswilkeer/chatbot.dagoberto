@@ -1,6 +1,12 @@
 const wakatime = () => console.log('pipico ta morrendo')
 
-const hello = () => console.log('hello')
+const greatings = () => {
+  return 'Yay!'
+}
+
+const hello = () => {
+  return 'Always here!'
+}
 
 const helloModule = {
   'leandboard': {
@@ -10,7 +16,12 @@ const helloModule = {
   
   'wakeup': {
     sentences: ['acorda', 'acorda!'],
-    action: hello
+    action: hello()
+  },
+
+  'comprimento': {
+    sentences: ['Ta bem?'],
+    action: greatings()
   }
 }
 
