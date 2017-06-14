@@ -1,6 +1,5 @@
 (() => {
 
-
 	'use strict';
 	const express = require('express');
 	const TeleBot = require('telebot');
@@ -12,6 +11,7 @@
 
 	dotenv.load();
 
+	const mentionTrigger = 'dagoberta'
 
 	const bot = new TeleBot({
 		token: process.env.TOKENTELEGRAM,
@@ -46,6 +46,7 @@
 
 	module.exports = {
 		Start: onStart
+		, mention: mentionTrigger
 		, bot: bot
 	};
 
