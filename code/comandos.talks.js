@@ -1,54 +1,32 @@
-(() => {
+const cerbero = require('./cerbero.js')
+const hello = require('../code/modules/hello')
 
+const debug = (x) => console.log(x)
 
-	const onLoad = (dagoberto) => {
+// process :: Object -> Response
+const process = (dagoberta) => (msg) => {
+	// TODO: Adicionar função para pegar todos os módulos
+	const modulesList = [hello]
+	const text = msg.text.split(' ')
+	const maybeCommands = text.slice(1, text.length)
+	const queue = cerbero(maybeCommands, modulesList)
+	// [Function]
+	queue.map((fn) => dagoberta.sendMessage(msg.chat.id, fn[0]))
+	// Executar cada função, retornar suas respostas num array e executar o send messange.
+	//dagoberta.sendMessage(msg.chat.id, 'Mensagem')
+}
 
-		dagoberto.on('text', (msg) => {
+// botMention :: [String] -> Boolean
+const botMention = (text) => text.split(' ')[0] == 'dagoberta' ? true : false
 
-			console.log(msg);
+const onLoad = (dagoberto) => {
+	dagoberto.on('text', (msg) => {
+		const actions = botMention(msg.text) ? process(dagoberto)(msg) : false
+	})
+}
 
-			// Não é nenhuma ação, apenas conversa normal
-			if (!msg.entities) { return; }
-
-			// Houve uma invocaçào do bot mas não é uma mensão
-			if (msg.entities[0].type !== "mention") { return; }
-
-			// Mensão de outras pessoas, mas não do Dagoberto.
-			if (msg.text.indexOf("@dagobertoobot") < 0) { return; }
-
-			let mensagem = msg.text.replace("@dagobertoobot ", "");
-
-			let chatId = msg.chat.id;
-
-
-			switch (mensagem) {
-
-				case 'dados':
-					dagoberto.sendMessage(chatId, ` Está aqui doutor!  ${msg}  \n ----\n ${JSON.stringify(msg)} `);
-					break;
-				case 'horas':
-					dagoberto.sendMessage(chatId, ` Agora são no servidor : ${new Date()}`);
-
-					break;
-
-				default:
-					dagoberto.sendMessage(chatId, `Desculpem, ${msg.from.first_name} ainda estou em construção`);
-					break
-
-			}
-
-
-
-		})
-
-	}
-
-
-
-
-
-	module.exports = {
-		Load: onLoad
-	}
-
-})()
+module.exports = {
+	Load: onLoad,
+	botMention: botMention,
+	process: process
+}
