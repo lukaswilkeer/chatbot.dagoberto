@@ -1,0 +1,8 @@
+  
+Dagoberto:
+  todo:
+    ☐ Improve code coverage and tests
+
+  fixes:
+    modules:
+      ☐ Add promise suport.
